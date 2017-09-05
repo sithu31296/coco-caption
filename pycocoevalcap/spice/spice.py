@@ -36,13 +36,13 @@ class Spice:
 
             # Sanity check.
             assert(type(hypo) is list)
-            assert(len(hypo) == 1)
+            assert(len(hypo) >= 1)
             assert(type(ref) is list)
             assert(len(ref) >= 1)
 
             input_data.append({
               "image_id" : id,
-              "test" : hypo[0],
+              "tests" : hypo,
               "refs" : ref
             })
 
