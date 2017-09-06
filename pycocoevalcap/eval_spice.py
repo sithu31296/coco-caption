@@ -50,6 +50,8 @@ class COCOEvalCapSpice:
         self.cocoRes = cocoRes
         self.params = {'image_id': coco.getImgIds()}
 
+        self.Spice = Spice()
+
     def evaluate(self):
         imgIds = self.params['image_id']
         # imgIds = self.coco.getImgIds()
@@ -72,7 +74,7 @@ class COCOEvalCapSpice:
         # =================================================
         print 'setting up scorers...'
         scorers = [
-            (Spice(), "SPICE")
+            (self.Spice, "SPICE")
         ]
 
         # =================================================

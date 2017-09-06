@@ -8,6 +8,9 @@ import numpy as np
 import ast
 import tempfile
 
+import time
+import shutil
+
 # Assumes spice.jar is in the same directory as spice.py.  Change as needed.
 SPICE_JAR = 'spice-1.0.jar'
 TEMP_DIR = 'tmp'
@@ -17,6 +20,12 @@ class Spice:
     """
     Main Class to compute the SPICE metric 
     """
+    def __init__(self):
+        cwd = os.path.dirname(os.path.abspath(__file__))
+        cache_dir=os.path.join(cwd, CACHE_DIR, str(time.time()))
+        self.cache_dir = cache_dir
+        if not os.path.exists(cache_dir):
+          os.makedirs(cache_dir)
 
     def float_convert(self, obj):
         try:
@@ -57,11 +66,8 @@ class Spice:
         # Start job
         out_file = tempfile.NamedTemporaryFile(delete=False, dir=temp_dir)
         out_file.close()
-        cache_dir=os.path.join(cwd, CACHE_DIR)
-        if not os.path.exists(cache_dir):
-          os.makedirs(cache_dir)
         spice_cmd = ['java', '-jar', '-Xmx8G', SPICE_JAR, in_file.name,
-          '-cache', cache_dir,
+          '-cache', self.cache_dir,
           '-out', out_file.name,
           '-subset',
           '-silent'
@@ -92,5 +98,8 @@ class Spice:
 
     def method(self):
         return "SPICE"
+
+    def __del__(self):
+        shutil.rmtree(self.cache_dir)
 
 
