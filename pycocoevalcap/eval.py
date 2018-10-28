@@ -16,6 +16,8 @@ class COCOEvalCap:
         self.cocoRes = cocoRes
         self.params = {'image_id': coco.getImgIds()}
 
+        self.Spice = Spice()
+
     def evaluate(self):
         imgIds = self.params['image_id']
         # imgIds = self.coco.getImgIds()
@@ -42,7 +44,7 @@ class COCOEvalCap:
             (Meteor(),"METEOR"),
             (Rouge(), "ROUGE_L"),
             (Cider(), "CIDEr"),
-            (Spice(), "SPICE"),
+            (self.Spice, "SPICE"),
             (WMD(),   "WMD"),
         ]
 
