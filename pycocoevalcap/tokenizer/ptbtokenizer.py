@@ -7,6 +7,9 @@
 # Creation Date : 29-12-2014
 # Last Modified : Thu Mar 19 09:53:35 2015
 # Authors : Hao Fang <hfang@uw.edu> and Tsung-Yi Lin <tl483@cornell.edu>
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 import os
 import sys

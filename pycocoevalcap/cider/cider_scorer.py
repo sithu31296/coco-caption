@@ -1,6 +1,9 @@
     #!/usr/bin/env python
 # Tsung-Yi Lin <tl483@cornell.edu>
 # Ramakrishna Vedantam <vrama91@vt.edu>
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 import copy
 from collections import defaultdict

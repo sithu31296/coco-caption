@@ -1,6 +1,9 @@
 '''
 Special thanks to Mert Kilickaya, first author of 'Re-evaluating Automatic Metrics for Image Captioning' [http://aclweb.org/anthology/E17-1019] for giving exact instructions on how to implement the Word Mover's Distance metric here.
 '''
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 import numpy as np
 import gensim
@@ -9,8 +12,8 @@ import os
 class WMD:
 
     def __init__(self):
-        with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'data', 'stopwords.txt'), 'r', encoding='utf-8') as f:
-            self.stop_words = set(f.read().strip().split(' ')) #Stop words were taken from NLTK nltk.stopwords.words('english')
+        with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'data', 'stopwords.txt'), 'rb') as f:
+            self.stop_words = set(f.read().decode('utf-8').strip().split(' ')) #Stop words were taken from NLTK nltk.stopwords.words('english')
         self.model = gensim.models.KeyedVectors.load_word2vec_format(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'data', 'GoogleNews-vectors-negative300.bin'), binary=True)
         self.sigma = 1.0
         

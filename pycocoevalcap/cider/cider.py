@@ -6,6 +6,9 @@
 # Creation Date: Sun Feb  8 14:16:54 2015
 #
 # Authors: Ramakrishna Vedantam <vrama91@vt.edu> and Tsung-Yi Lin <tl483@cornell.edu>
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 from .cider_scorer import CiderScorer
 import pdb

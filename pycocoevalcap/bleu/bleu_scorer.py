@@ -15,6 +15,9 @@
 cook_refs(refs, n=4): Transform a list of reference sentences as strings into a form usable by cook_test().
 cook_test(test, refs, n=4): Transform a test sentence as a string (together with the cooked reference sentences) into a form usable by score_cooked().
 '''
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 import copy
 import sys, math, re

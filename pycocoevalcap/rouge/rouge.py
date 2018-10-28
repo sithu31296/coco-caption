@@ -6,6 +6,9 @@
 #
 # Creation Date : 2015-01-07 06:03
 # Author : Ramakrishna Vedantam <vrama91@vt.edu>
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 import numpy as np
 
