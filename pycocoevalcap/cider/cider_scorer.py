@@ -10,6 +10,7 @@ from collections import defaultdict
 import numpy as np
 import pdb
 import math
+import os
 
 def precook(s, n=4, out=False):
     """
@@ -158,7 +159,8 @@ class CiderScorer(object):
 
                 assert(not math.isnan(val[n]))
                 # vrama91: added a length based gaussian penalty
-                val[n] *= np.e**(-(delta**2)/(2*self.sigma**2))
+                if os.getenv('CIDER_LENGTH_PENALTY_OFF', '0') == '0' and os.getenv('COMBINE_REFS', '0') == '0':
+                    val[n] *= np.e**(-(delta**2)/(2*self.sigma**2))
             return val
 
         # compute log reference length
@@ -168,18 +170,29 @@ class CiderScorer(object):
         for test, refs in zip(self.ctest, self.crefs):
             # compute vector for test captions
             vec, norm, length = counts2vec(test)
-            # compute vector for ref captions
-            score = np.array([0.0 for _ in range(self.n)])
-            for ref in refs:
-                vec_ref, norm_ref, length_ref = counts2vec(ref)
-                score += sim(vec, vec_ref, norm, norm_ref, length, length_ref)
-            # change by vrama91 - mean of ngram scores, instead of sum
-            score_avg = np.mean(score)
-            # divide by number of references
-            score_avg /= len(refs)
-            # multiply score by 10
-            score_avg *= 10.0
-            # append score of an image to the score list
+            if os.getenv('COMBINE_REFS', '0') == '0':
+                # compute vector for ref captions
+                score = np.array([0.0 for _ in range(self.n)])
+                for ref in refs:
+                    vec_ref, norm_ref, length_ref = counts2vec(ref)
+                    score += sim(vec, vec_ref, norm, norm_ref, length, length_ref)
+                # change by vrama91 - mean of ngram scores, instead of sum
+                score_avg = np.mean(score)
+                # divide by number of references
+                score_avg /= len(refs)
+                # multiply score by 10
+                score_avg *= 10.0
+                # append score of an image to the score list
+            else:
+                combined_refs = defaultdict(float)
+                for ref in refs:
+                    for (ngram,count) in ref.items():
+                        combined_refs[ngram] += count
+                vec_ref, norm_ref, length_ref = counts2vec(combined_refs)
+                score = sim(vec, vec_ref, norm, norm_ref, length, length_ref)
+                score_avg = np.mean(score)
+                score_avg *= 10.0
+
             scores.append(score_avg)
         return scores
 
