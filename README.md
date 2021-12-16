@@ -3,7 +3,7 @@ Microsoft COCO Caption Evaluation
 
 Evaluation codes for MS COCO caption generation.
 
-This is a new fork from [ruptianlup/coco-caption](https://github.com/ruotianluo/coco-caption) which fixes the following:
+This is a new fork from [ruotianluo/coco-caption](https://github.com/ruotianluo/coco-caption) which fixes the following:
 
 * METEOR evaluation error
 * SPICE evaluation error (Caching error in Windows)
@@ -18,6 +18,8 @@ Other details can be seen in the forked repo.
 * python 3
 * gensim
 * pyemd
+
+> For Windows, download java from [here](https://www.java.com/en/download/manual.jsp).
 
 ## Installation
 
