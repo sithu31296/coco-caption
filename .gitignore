@@ -1,1 +1,6 @@
 *.pyc
+pycocoevalcap/wmd/data/GoogleNews-vectors-negative300.bin
+pycocoevalcap/spice/cache/
+pycocoevalcap/spice/tmp/
+pycocoevalcap/spice/lib/stanford-corenlp-3.6.0-models.jar
+pycocoevalcap/spice/lib/stanford-corenlp-3.6.0.jar

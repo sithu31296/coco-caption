@@ -70,7 +70,7 @@ class Spice:
         out_file = tempfile.NamedTemporaryFile(delete=False, dir=temp_dir)
         out_file.close()
         spice_cmd = ['java', '-jar', '-Xmx8G', SPICE_JAR, in_file.name,
-          '-cache', self.cache_dir,
+          # '-cache', self.cache_dir,
           '-out', out_file.name,
           '-subset',
           '-silent'
